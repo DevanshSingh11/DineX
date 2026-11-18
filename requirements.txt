@@ -1,0 +1,10 @@
+fastapi==0.141.1
+uvicorn==0.52.1
+SQLAlchemy==2.1.9
+pydantic==2.13.4
+python-dotenv==1.2.2
+qrcode==8.2
+Pillow==13.0.0
+httpx==0.28.1
+tzdata>=2025.2
+pytest==9.2.0

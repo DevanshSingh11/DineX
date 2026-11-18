@@ -1,0 +1,8 @@
+{
+  "name": "dinex-ui-check",
+  "private": true,
+  "type": "module",
+  "description": "Optional DOM integration check for DineX, using a disposable HTTP server",
+  "engines": {"node": ">=22"},
+  "dependencies": {"esbuild": "0.25.12", "jsdom": "26.1.0"}
+}

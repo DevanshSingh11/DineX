@@ -1,0 +1,1 @@
+"""DineX Universal restaurant operations."""
