@@ -97,6 +97,19 @@ npm ci --prefix checks/ui
 .\.venv\Scripts\python.exe checks/ui_journey.py
 ```
 
+## Fix a request-origin error
+
+If a browser shows the message `Use the configured DineX origin and request header`, compare its address with the origin printed by `Start-DineX.bat`. Open the printed origin. Do not open `0.0.0.0` or an old address.
+
+For this PC, if the current Wi-Fi address is `192.168.0.101`, stop DineX with Ctrl+C. In PowerShell, from the project folder, start the server with the matching origin:
+
+```powershell
+$env:DINEX_PUBLIC_URL = 'http://192.168.0.101:8000'
+.\.venv\Scripts\python.exe -m dinex serve --host 0.0.0.0 --port 8000
+```
+
+Open `http://192.168.0.101:8000/platform` again and refresh. This address can change after switching Wi-Fi networks. The corrected launcher uses the active network route to select the same address for the server, browser and printed QR codes.
+
 ## Operations and support
 
 - Back up the database using SQLite's online backup API or stop DineX before copying the complete data directory. Back up `.env` separately and protect both copies. Restore them into the same Universal schema generation with the service stopped.

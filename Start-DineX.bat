@@ -7,7 +7,7 @@ echo  DineX Universal
 echo  Finding this PC's local network address...
 echo.
 
-for /f "usebackq delims=" %%I in (`powershell -NoProfile -Command "$r = Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue ^| Sort-Object RouteMetric ^| Select-Object -First 1; if ($r) { (Get-NetIPAddress -InterfaceIndex $r.InterfaceIndex -AddressFamily IPv4 -ErrorAction SilentlyContinue ^| Where-Object { $_.IPAddress -notlike '169.254*' } ^| Select-Object -First 1).IPAddress }"`) do set "DINEX_LAN_IP=%%I"
+for /f "usebackq delims=" %%I in (`powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Find-DineX-IP.ps1"`) do set "DINEX_LAN_IP=%%I"
 
 if not defined DINEX_LAN_IP (
     echo Could not find an active Wi-Fi or Ethernet IPv4 address.
@@ -19,6 +19,9 @@ if not defined DINEX_LAN_IP (
 )
 
 set "DINEX_PUBLIC_URL=http://%DINEX_LAN_IP%:8000"
+echo This address will be used for the browser and table QR codes:
+echo %DINEX_PUBLIC_URL%
+echo.
 
 py -3.14 --version >nul 2>&1
 if errorlevel 1 (
